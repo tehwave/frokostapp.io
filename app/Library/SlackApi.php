@@ -66,8 +66,6 @@ class SlackApi
         if ($method !== 'GET') {
             $options['json'] = $data;
             $options['headers']['Content-Type'] = 'application/json; charset=utf-8';
-        } else {
-
         }
 
         try {
