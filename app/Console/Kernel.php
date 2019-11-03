@@ -17,8 +17,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('frokost:lunch', [
             '--force' => true,
-        ])
-        ->everyFiveMinutes();
+        ])->everyMinute();
     }
 
     /**
