@@ -45,7 +45,7 @@
                                         <div class="form-group mb-4">
                                             <label for="timeslot">When should they be picked?</label>
                                             <div class="input-group">
-                                                <select class="custom-select" id="inputGroupSelect01">
+                                                <select name="timeslot" class="custom-select" id="timeslot">
                                                     {{-- 10 --}}
                                                     <option value="10:00" {{ old('timeslot', $slack->setting('timeslot')) === '10:00' ? 'selected' : '' }}>10:00</option>
                                                     <option value="10:15" {{ old('timeslot', $slack->setting('timeslot')) === '10:15' ? 'selected' : '' }}>10:15</option>
