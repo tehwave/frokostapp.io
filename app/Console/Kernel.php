@@ -15,9 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('frokost:lunch', [
-            '--force' => true,
-        ])->everyMinute();
+        $schedule->command('frokost:lunch', ['--force'])
+            ->environments('production')
+            ->everyMinute();
     }
 
     /**
