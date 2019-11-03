@@ -19,7 +19,7 @@
                             <div class="card-body px-6">
                                 <h1 class="display-3 text-danger">FROKOST</h1>
                                 <p class="lead">Choose who's gonna get lunch with an impartial robot.</p>
-                                <a href="https://slack.com/oauth/authorize?scope=bot&client_id=7507495621.821163576727"><img alt=""Add to Slack"" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />
+                                <a href="{{ route('slack.redirect') }}"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />
                                     <span class="sr-only">
                                         Add to Slack
                                     </span>

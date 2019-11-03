@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
-Auth::routes();
+Route::get('slack/redirect', 'SlackController@redirect')->name('slack.redirect');
+Route::get('slack/callback', 'SlackController@callback')->name('slack.callback');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('slacks/{slack}/settings', 'Slack\SettingController@edit')->name('slack.settings.edit');
+Route::put('slacks/{slack}/settings', 'Slack\SettingController@update')->name('slack.settings.update');
