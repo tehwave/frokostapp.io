@@ -34,6 +34,7 @@ class SettingController extends Controller
                 'channel'   => $request->channel,
                 'count'     => $request->count,
                 'timeslot'  => $request->timeslot,
+                'language'  => $request->language,
             ],
         ]);
 

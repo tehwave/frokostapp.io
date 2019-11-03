@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App;
 use Str;
 use App\Slack;
 use Carbon\Carbon;
@@ -64,7 +65,7 @@ class Lunch extends Command
                 return $query->whereId($id);
             })
             ->where('settings->active', true)
-            ->where('settings->timeslot', Carbon::now()->format('H:i'))
+            // ->where('settings->timeslot', Carbon::now()->format('H:i'))
             ->each(function ($slack) use (&$teamsCount) {
                 $api = (new SlackApi($slack->access_token));
 
@@ -82,13 +83,16 @@ class Lunch extends Command
                     ->random($howManyToChoose)
                     ->transform(function ($user) {
                         return "@{$user['name']}";
-                    });
+                    })
+                    ->toArray();
 
-                $text = "Aww, it looks like {$this->naturalImplode($users->toArray())} gets to make lunch today!";
+                App::setLocale($slack->setting('language', 'en'));
+
+                $message = __('lunch.message.generic', ['user' => $this->naturalImplode($users)]);
 
                 $api->post('chat.postMessage', [
                     'channel' => $slack->setting('channel', '#general'),
-                    'text' => $text,
+                    'text' => $message,
                     'link_names' => true,
                 ]);
             });
@@ -109,9 +113,13 @@ class Lunch extends Command
      * @param  string  $conjunction 'and'
      * @return string
      */
-    public function naturalImplode(array $list, $conjunction = 'and')
+    public function naturalImplode(array $list, $conjunction = null)
     {
         $last = array_pop($list);
+
+        if (empty($conjunction)) {
+            $conjunction = __('lunch.conjunction');
+        }
 
         if ($list) {
             return implode(', ', $list).' '.$conjunction.' '.$last;

@@ -67,12 +67,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group mb-4">
                                             <label for="channel">What channel to tag them in?</label>
                                             <input name="channel" type="text" class="form-control" id="channel" placeholder="#general" value="{{ old('channel', $slack->setting('channel')) }}">
                                             <div class="form-text text-muted">
                                                 Default channel is <code>#general</code>.
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="language">What language to send the message in?</label>
+                                            <select name="language" class="custom-select" id="language">
+                                                <option value="en" {{ old('language', $slack->setting('language', 'en')) === 'en' ? 'selected' : '' }}>English</option>
+                                                <option value="da" {{ old('language', $slack->setting('language')) === 'da' ? 'selected' : '' }}>Danish</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="card-footer bg-transparent">
