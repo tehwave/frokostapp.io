@@ -38,6 +38,11 @@
                                         </div>
                                     </div>
                                     <div class="card-body py-6">
+                                        @if (session()->has('toast'))
+                                            <p class="lead text-success">
+                                                {{ session('toast') }}
+                                            </p>
+                                        @endif
                                         <div class="form-group mb-4">
                                             <label for="count">How many unlucky users to choose for lunch?</label>
                                             <input name="count" type="number" class="form-control" id="count" placeholder="1" value="{{ old('count', $slack->setting('count')) }}">
