@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>FROKOST</title>
+        <meta name="description" content="Choose who's gonna get lunch with an impartial robot.">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -12,10 +12,13 @@
     </head>
     <body class="h-100">
         <div class="jumbotron jumbotron-fluid h-100 mb-0" style="background-image: url({{ asset('images/lunch.jpg') }}); background-size: cover;">
-            <div class="container">
-                <div class="row">
-                    <div class="col col-lg-6">
-                        <div class="card shadow-lg text-center rounded-pill border-0">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col col-lg-6 my-auto">
+                        <div class="card shadow-lg border-0 text-center">
+                            <div class="card-header bg-pattern p-4">
+                                {{--  --}}
+                            </div>
                             <div class="card-body px-6">
                                 <h1 class="display-3 text-danger">FROKOST</h1>
                                 <p class="lead">Choose who's gonna get lunch with an impartial robot.</p>
