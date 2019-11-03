@@ -30,7 +30,7 @@ class SettingController extends Controller
     {
         $slack->update([
             'settings' => [
-                'active'    => $request->active ?? false,
+                'active'    => $request->filled('active'),
                 'channel'   => $request->channel,
                 'count'     => $request->count,
                 'timeslot'  => $request->timeslot,

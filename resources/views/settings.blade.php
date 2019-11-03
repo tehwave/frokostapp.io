@@ -31,7 +31,7 @@
                                             </div>
                                             <div class="col text-right">
                                                 <div class="custom-control custom-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="active" {{ old('active', $slack->setting('active', true)) === true ? 'checked="checked"' : '' }}>
+                                                    <input name="active" type="checkbox" class="custom-control-input" id="active" value="1" {{ old('active', $slack->setting('active', true)) === true ? 'checked="checked"' : '' }}>
                                                     <label class="custom-control-label" for="active">Active</label>
                                                 </div>
                                             </div>
