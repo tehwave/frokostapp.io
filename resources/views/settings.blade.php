@@ -11,8 +11,6 @@
         @stack('styles')
     </head>
     <body class="h-100">
-        <div class="jumbotron jumbotron-fluid h-100 mb-0 bg-danger">
-            <div class="container">
         <div class="jumbotron jumbotron-fluid h-100 mb-0 bg-transparent">
             <div class="container h-100">
                 <div class="row h-100">
