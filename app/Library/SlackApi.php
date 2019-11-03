@@ -156,7 +156,7 @@ class SlackApi
                     'user' => $user['id'],
                 ]);
 
-                return $status['online'];
+                return $status['online'] ?? false;
             });
     }
 }
