@@ -60,7 +60,7 @@ class Slack extends Model
         if (is_string($arguments[0])) {
             $setting = $this->settings[$arguments[0]] ?? null;
 
-            if ($setting) {
+            if (isset($setting)) {
                 return $setting;
             }
 

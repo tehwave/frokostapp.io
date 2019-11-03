@@ -30,10 +30,14 @@ class SettingController extends Controller
     {
         $slack->update([
             'settings' => [
-                'channel' => $request->channel,
-                'amount'  => $request->amount,
+                'active'    => $request->active ?? false,
+                'channel'   => $request->channel,
+                'count'     => $request->count,
+                'timeslot'  => $request->timeslot,
             ],
         ]);
+
+        $request->session()->flash('toast', 'Settings freshly saved!');
 
         return redirect()->back();
     }
