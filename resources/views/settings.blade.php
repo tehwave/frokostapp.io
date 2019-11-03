@@ -38,11 +38,6 @@
                                         </div>
                                     </div>
                                     <div class="card-body py-6">
-                                        @if (session()->has('toast'))
-                                            <p class="lead text-success">
-                                                {{ session('toast') }}
-                                            </p>
-                                        @endif
                                         <div class="form-group mb-4">
                                             <label for="count">How many unlucky users to choose for lunch?</label>
                                             <input name="count" type="number" class="form-control" id="count" placeholder="1" value="{{ old('count', $slack->setting('count')) }}">
@@ -80,10 +75,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer text-center bg-transparent">
-                                        <button type="submit" class="btn btn-success px-6">
-                                            Save
-                                        </button>
+                                    <div class="card-footer bg-transparent">
+                                        <div class="row">
+                                            <div class="col-auto my-auto">
+                                                @if (session()->has('toast'))
+                                                    <span class="text-success">
+                                                        {{ session('toast') }}
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <div class="col text-right">
+                                                <button type="submit" class="btn btn-success px-6">
+                                                    Save
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
