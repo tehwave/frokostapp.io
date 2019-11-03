@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('frokost:lunch', ['--force'])
             ->environments('production')
+            ->weekdays()
             ->everyMinute();
     }
 
