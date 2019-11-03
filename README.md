@@ -51,7 +51,7 @@ npm run watch
 
 Deploy Script for Laravel Forge
 
-    cd /home/forge/peterchrjoergensen.dk
+    cd /home/forge/frokostapp.io
 
     php artisan down
 
