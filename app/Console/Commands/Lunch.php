@@ -69,17 +69,17 @@ class Lunch extends Command
             ->each(function ($slack) use (&$teamsCount) {
                 $api = (new SlackApi($slack->access_token));
 
-                $onlineUsers = $api->onlineUsers();
+                $users = $api->users();
 
                 $howManyToChoose = $slack->setting('count', 1);
 
-                if ($onlineUsers->count() < $howManyToChoose) {
+                if ($users->count() < $howManyToChoose) {
                     return false;
                 }
 
                 $teamsCount++;
 
-                $users = $onlineUsers
+                $losers = $users
                     ->random($howManyToChoose)
                     ->transform(function ($user) {
                         return "@{$user['name']}";
@@ -88,7 +88,7 @@ class Lunch extends Command
 
                 App::setLocale($slack->setting('language', 'en'));
 
-                $message = __('lunch.message.generic', ['user' => $this->naturalImplode($users)]);
+                $message = __('lunch.message.generic', ['user' => $this->naturalImplode($losers)]);
 
                 $api->post('chat.postMessage', [
                     'channel' => $slack->setting('channel', '#general'),
