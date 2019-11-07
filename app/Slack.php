@@ -49,6 +49,16 @@ class Slack extends Model
     }
 
     /**
+     * Retrieve the statistics.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function statistics()
+    {
+        return $this->morphMany('App\Statistic', 'statistical');
+    }
+
+    /**
      * Retrieve or set settings.
      *
      * @return array
