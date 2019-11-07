@@ -92,7 +92,7 @@ class Lunch extends Command
                     ->random($howManyToChoose)
                     ->each(function ($user) use ($slack) {
                         $slack->statistics()->create([
-                            'key' => 'lunch_by',
+                            'key' => 'lunch',
                             'value' => $user['name'],
                         ]);
                     })
