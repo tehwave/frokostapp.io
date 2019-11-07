@@ -69,17 +69,17 @@ class Lunch extends Command
             ->each(function ($slack) use (&$teamsCount) {
                 $api = (new SlackApi($slack->access_token));
 
-                $users = $api->users();
+                $activeUsers = $api->activeUsers();
 
                 $howManyToChoose = $slack->setting('count', 1);
 
-                if ($users->count() < $howManyToChoose) {
+                if ($activeUsers->count() < $howManyToChoose) {
                     return false;
                 }
 
                 $teamsCount++;
 
-                $losers = $users
+                $losers = $activeUsers
                     ->random($howManyToChoose)
                     ->transform(function ($user) {
                         return "@{$user['name']}";
