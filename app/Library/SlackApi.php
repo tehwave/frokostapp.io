@@ -61,12 +61,8 @@ class SlackApi
                 'Accept' => 'application/json',
                 'Authorization' => "Bearer {$this->token()}",
             ],
+            'form_params' => $data,
         ];
-
-        if ($method !== 'GET') {
-            $options['json'] = $data;
-            $options['headers']['Content-Type'] = 'application/json; charset=utf-8';
-        }
 
         try {
             $response = $client->request($method, $url, $options);
