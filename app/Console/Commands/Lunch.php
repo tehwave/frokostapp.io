@@ -88,6 +88,8 @@ class Lunch extends Command
 
                 $teamsCount++;
 
+                App::setLocale($slack->setting('language', 'en'));
+
                 $losers = $users
                     ->random($howManyToChoose)
                     ->each(function ($user) use ($slack) {
@@ -100,8 +102,6 @@ class Lunch extends Command
                         return "@{$user['name']}";
                     })
                     ->join(', ', ' '.__('lunch.conjunction').' ');
-
-                App::setLocale($slack->setting('language', 'en'));
 
                 $message = __('lunch.message.generic', ['user' => $losers]);
 
