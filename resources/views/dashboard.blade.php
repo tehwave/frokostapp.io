@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Settings – FROKOST</title>
+        <title>Dashboard – FROKOST</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -16,7 +16,7 @@
                 <div class="row h-100">
                     <div class="col my-auto">
                         <div class="text-left text-light mb-4">
-                            <h1 class="display-4">Settings</h1>
+                            <h1 class="display-4">Dashboard</h1>
                         </div>
                         <form method="POST" action="{{ route('slack.settings.update', $slack) }}" class="card shadow border-0 rounded mb-4">
                             @method('PUT')
@@ -38,6 +38,13 @@
                                         </div>
                                     </div>
                                     <div class="card-body py-6">
+                                        <div class="form-group mb-4">
+                                            <label for="presence">Whom should be chosen?</label>
+                                            <select name="presence" class="custom-select" id="presence">
+                                                <option value="all" {{ old('presence', $slack->setting('presence', 'all')) === 'all' ? 'selected' : '' }}>Everyone</option>
+                                                <option value="active" {{ old('presence', $slack->setting('presence')) === 'active' ? 'selected' : '' }}>Active-only</option>
+                                            </select>
+                                        </div>
                                         <div class="form-group mb-4">
                                             <label for="count">How many unlucky users to choose for lunch?</label>
                                             <input name="count" type="number" class="form-control" id="count" placeholder="1" value="{{ old('count', $slack->setting('count')) }}">
@@ -63,7 +70,7 @@
                                                     <option value="12:45" {{ old('timeslot', $slack->setting('timeslot')) === '12:45' ? 'selected' : '' }}>12:45</option>
                                                 </select>
                                                 <div class="input-group-append">
-                                                    <label class="input-group-text">UTC</label>
+                                                    <label class="input-group-text bg-primary border-primary text-white">UTC</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,7 +99,7 @@
                                                 @endif
                                             </div>
                                             <div class="col text-right">
-                                                <button type="submit" class="btn btn-success px-6">
+                                                <button type="submit" class="btn btn-primary px-6">
                                                     Save
                                                 </button>
                                             </div>
@@ -100,7 +107,30 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
-                                    <div class="h-100 rounded-right" style="background-image: url({{ asset('images/lunch2.jpg') }}); background-size: cover;"></div>
+                                    <div class="d-flex h-100 align-items-end rounded-right" style="background-image: url({{ asset('images/lunch2.jpg') }}); background-size: cover;">
+                                        @if ($statistics->isNotEmpty())
+                                            <ul class="list-group w-100 m-4 shadow-sm">
+                                                <li class="list-group-item">
+                                                    <div class="row no-gutters py-2">
+                                                        <div class="col-auto my-auto">
+                                                            <h4 class="my-0">FROKOST</h4>
+                                                        </div>
+                                                        <div class="col my-auto text-right text-danger text-uppercase font-weight-bold">
+                                                            Top 10
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                @foreach ($statistics as $statistic)
+                                                    <li class="list-group-item">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-9 col-lg-auto">{{ $statistic->value }}</div>
+                                                            <div class="col-3 col-lg text-right">{{ $statistic->total }}</div>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </form>

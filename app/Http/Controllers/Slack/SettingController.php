@@ -9,17 +9,6 @@ use App\Http\Controllers\Controller;
 class SettingController extends Controller
 {
     /**
-     * Show the editing page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function edit(Slack $slack)
-    {
-        return view('settings')
-            ->withSlack($slack);
-    }
-
-    /**
      * Update the settings
      *
      * @param  \Illuminate\Http\Request $request
@@ -31,6 +20,7 @@ class SettingController extends Controller
         $slack->update([
             'settings' => [
                 'active'    => $request->filled('active'),
+                'presence'  => $request->presence,
                 'channel'   => $request->channel,
                 'count'     => $request->count,
                 'timeslot'  => $request->timeslot,

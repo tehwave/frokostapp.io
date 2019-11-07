@@ -22,7 +22,8 @@ class Lunch extends Command
      */
     protected $signature = 'frokost:lunch
         {slack? : The ID of the Slack or range of IDs}
-        {--force : Force the operation to skip any prompts}';
+        {--force : Force the operation to skip any prompts}
+        {--now : Skip checking the timeslot}';
 
     /**
      * The console command description.
@@ -51,8 +52,9 @@ class Lunch extends Command
         // Pick lunch!
         $teamsCount = 0;
 
-        Slack::when($this->argument('slack'), function ($query) {
-                [$id, $limit] = array_pad(explode('-', $this->argument('slack')), 2, null);
+        Slack::where('settings->active', true)
+            ->when($this->argument('slack'), function ($query, $input) {
+                [$id, $limit] = array_pad(explode('-', $input), 2, null);
 
                 if (isset($limit)) {
                     if ($id > $limit) {
@@ -64,12 +66,19 @@ class Lunch extends Command
 
                 return $query->whereId($id);
             })
-            ->where('settings->active', true)
-            ->where('settings->timeslot', Carbon::now()->format('H:i'))
+            ->when($this->option('now'), function ($query) {
+                return $query;
+            }, function ($query) {
+                return $query->where('settings->timeslot', Carbon::now()->format('H:i'));
+            })
             ->each(function ($slack) use (&$teamsCount) {
                 $api = (new SlackApi($slack->access_token));
 
-                $users = $api->users();
+                if ($slack->setting('presence') === 'active') {
+                    $users = $api->activeUsers();
+                } else {
+                    $users = $api->users();
+                }
 
                 $howManyToChoose = $slack->setting('count', 1);
 
@@ -81,14 +90,20 @@ class Lunch extends Command
 
                 $losers = $users
                     ->random($howManyToChoose)
+                    ->each(function ($user) use ($slack) {
+                        $slack->statistics()->create([
+                            'key' => 'lunch',
+                            'value' => $user['name'],
+                        ]);
+                    })
                     ->transform(function ($user) {
                         return "@{$user['name']}";
                     })
-                    ->toArray();
+                    ->join(', ', ' '.__('lunch.conjunction').' ');
 
                 App::setLocale($slack->setting('language', 'en'));
 
-                $message = __('lunch.message.generic', ['user' => $this->naturalImplode($losers)]);
+                $message = __('lunch.message.generic', ['user' => $losers]);
 
                 $api->post('chat.postMessage', [
                     'channel' => $slack->setting('channel', '#general'),
@@ -103,29 +118,6 @@ class Lunch extends Command
             $teamsCount,
             Str::plural('team', $teamsCount)
         ));
-    }
-
-    /**
-     * Join a string with a natural language conjunction at the end.
-     * https://gist.github.com/angry-dan/e01b8712d6538510dd9c.
-     *
-     * @param  array  $list
-     * @param  string  $conjunction 'and'
-     * @return string
-     */
-    public function naturalImplode(array $list, $conjunction = null)
-    {
-        $last = array_pop($list);
-
-        if (empty($conjunction)) {
-            $conjunction = __('lunch.conjunction');
-        }
-
-        if ($list) {
-            return implode(', ', $list).' '.$conjunction.' '.$last;
-        }
-
-        return $last;
     }
 }
 

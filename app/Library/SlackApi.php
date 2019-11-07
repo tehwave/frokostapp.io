@@ -59,14 +59,10 @@ class SlackApi
         $options = [
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => "Bearer {$this->token()}",
+                'Authorization' => "Bearer {$this->token}",
             ],
+            'form_params' => $data,
         ];
-
-        if ($method !== 'GET') {
-            $options['json'] = $data;
-            $options['headers']['Content-Type'] = 'application/json; charset=utf-8';
-        }
 
         try {
             $response = $client->request($method, $url, $options);
@@ -144,11 +140,11 @@ class SlackApi
     }
 
     /**
-     * Only online users.
+     * Only active users.
      *
      * @return \Illuminate\Support\Collection
      */
-    public function onlineUsers()
+    public function activeUsers()
     {
         return $this->users()
             ->filter(function ($user) {
@@ -156,7 +152,7 @@ class SlackApi
                     'user' => $user['id'],
                 ]);
 
-                return $status['online'] ?? false;
+                return $status['presence'] === 'active';
             });
     }
 }
