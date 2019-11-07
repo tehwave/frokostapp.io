@@ -144,11 +144,11 @@ class SlackApi
     }
 
     /**
-     * Only online users.
+     * Only active users.
      *
      * @return \Illuminate\Support\Collection
      */
-    public function onlineUsers()
+    public function activeUsers()
     {
         return $this->users()
             ->filter(function ($user) {
@@ -156,7 +156,7 @@ class SlackApi
                     'user' => $user['id'],
                 ]);
 
-                return $status['online'] ?? false;
+                return $status['presence'] === 'active';
             });
     }
 }
