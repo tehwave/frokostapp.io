@@ -107,8 +107,29 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
-                                    <div class="h-100 rounded-right" style="background-image: url({{ asset('images/lunch2.jpg') }}); background-size: cover;">
-
+                                    <div class="d-flex h-100 align-items-end rounded-right" style="background-image: url({{ asset('images/lunch2.jpg') }}); background-size: cover;">
+                                        @if ($statistics->isNotEmpty())
+                                            <ul class="list-group w-100 m-4 shadow-sm">
+                                                <li class="list-group-item">
+                                                    <div class="row no-gutters py-2">
+                                                        <div class="col-auto my-auto">
+                                                            <h4 class="my-0">FROKOST</h4>
+                                                        </div>
+                                                        <div class="col my-auto text-right text-danger text-uppercase font-weight-bold">
+                                                            Top 10
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                @foreach ($statistics as $statistic)
+                                                    <li class="list-group-item">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-9 col-lg-auto">{{ $statistic->value }}</div>
+                                                            <div class="col-3 col-lg text-right">{{ $statistic->total }}</div>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
