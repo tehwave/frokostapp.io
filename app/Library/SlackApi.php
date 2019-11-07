@@ -59,7 +59,7 @@ class SlackApi
         $options = [
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => "Bearer {$this->token()}",
+                'Authorization' => "Bearer {$this->token}",
             ],
             'form_params' => $data,
         ];
