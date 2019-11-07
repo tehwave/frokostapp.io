@@ -99,11 +99,11 @@ class Lunch extends Command
                     ->transform(function ($user) {
                         return "@{$user['name']}";
                     })
-                    ->toArray();
+                    ->join(', ', ' '.__('lunch.conjunction').' ');
 
                 App::setLocale($slack->setting('language', 'en'));
 
-                $message = __('lunch.message.generic', ['user' => $this->naturalImplode($losers)]);
+                $message = __('lunch.message.generic', ['user' => $losers]);
 
                 $api->post('chat.postMessage', [
                     'channel' => $slack->setting('channel', '#general'),
@@ -118,29 +118,6 @@ class Lunch extends Command
             $teamsCount,
             Str::plural('team', $teamsCount)
         ));
-    }
-
-    /**
-     * Join a string with a natural language conjunction at the end.
-     * https://gist.github.com/angry-dan/e01b8712d6538510dd9c.
-     *
-     * @param  array  $list
-     * @param  string  $conjunction 'and'
-     * @return string
-     */
-    public function naturalImplode(array $list, $conjunction = null)
-    {
-        $last = array_pop($list);
-
-        if (empty($conjunction)) {
-            $conjunction = __('lunch.conjunction');
-        }
-
-        if ($list) {
-            return implode(', ', $list).' '.$conjunction.' '.$last;
-        }
-
-        return $last;
     }
 }
 
