@@ -90,6 +90,12 @@ class Lunch extends Command
 
                 $losers = $users
                     ->random($howManyToChoose)
+                    ->each(function ($user) use ($slack) {
+                        $slack->statistics()->create([
+                            'key' => 'lunch_by',
+                            'value' => $user['name'],
+                        ]);
+                    })
                     ->transform(function ($user) {
                         return "@{$user['name']}";
                     })
