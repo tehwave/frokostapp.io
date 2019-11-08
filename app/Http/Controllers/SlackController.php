@@ -39,7 +39,7 @@ class SlackController extends Controller
             'data'          => $result,
         ]);
 
-        return redirect()->route('slack.settings.edit', [
+        return redirect()->route('slack.dashboard', [
             'slack' => $slack->uuid,
         ]);
     }
