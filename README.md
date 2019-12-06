@@ -49,14 +49,19 @@ npm run watch
 
 ### Deployment
 
-Deploy Script for Laravel Forge
+Deploy Script for Laravel Forge.
 
     cd /home/forge/frokostapp.io
 
     php artisan down
 
     git pull origin master
+
     composer install --no-interaction --prefer-dist --optimize-autoloader
+
+    npm ci
+
+    npm run production
 
     php artisan migrate --force
 
