@@ -49,7 +49,7 @@ npm run watch
 
 ### Deployment
 
-Deploy Script for Laravel Forge
+Deploy Script for Laravel Forge.
 
     cd /home/forge/frokostapp.io
 
