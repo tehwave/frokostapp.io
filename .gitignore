@@ -10,3 +10,10 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+# Compiled assets.
+public/css/app.css
+public/js/app.js
+public/js/manifest.js
+public/js/vendor.js
+public/mix-manifest.json
