@@ -30,7 +30,8 @@ class Slack extends Model
      *
      * @return string
      */
-    public function getRouteKeyName() {
+    public function getRouteKeyName()
+    {
         return 'uuid';
     }
 
