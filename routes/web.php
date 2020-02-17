@@ -18,3 +18,5 @@ Route::get('slack/callback', 'SlackController@callback')->name('slack.callback')
 
 Route::get('slacks/{slack}/dashboard', 'Slack\DashboardController')->name('slack.dashboard');
 Route::put('slacks/{slack}/settings', 'Slack\SettingController@update')->name('slack.settings.update');
+
+Route::post('slacks/{slack}/message', 'Slack\MessageController')->name('slack.message.post');

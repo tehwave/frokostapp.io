@@ -1,0 +1,11 @@
+name: deploy
+on:
+  release:
+    types: [published]
+jobs:
+  deploy:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Laravel Forge
+        run: curl ${{ secrets.FORGE_DEPLOYMENT_WEBHOOK }}

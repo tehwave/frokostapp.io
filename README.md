@@ -10,14 +10,11 @@ https://frokostapp.io
 
 ## Requirements
 
-- PHP >= 7.2
-- MySQL >= 5.7
-- Laravel >= 6.*
+The application has been developed and tested to work with the following minimum requirements:
 
-### PHP Extensions
-
-- ext-curl: *
-- ext-json: *
+- PHP 7.4
+- MySQL 5.7
+- Laravel 6
 
 ## Installation
 
@@ -74,11 +71,11 @@ Deploy Script for Laravel Forge.
 
     php artisan queue:restart
 
-    echo "" | sudo -S service php7.2-fpm reload
+    echo "" | sudo -S service php7.4-fpm reload
 
     php artisan up
 
-Replace ```php7.2-fpm``` with the version of PHP installed on the server.
+Replace ```php7.4-fpm``` with the version of PHP installed on the server.
 
 ### Environment
 

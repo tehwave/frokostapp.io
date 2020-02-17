@@ -1,0 +1,34 @@
+name: tests
+on: pull_request
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [7.4]
+        laravel: [6.*]
+    name: PHPUnit
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Setup environment
+        run: cp -a .env.example .env
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+      - name: Dependencies cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+      - name: Install dependencies
+        run: |
+          composer install --no-ansi --no-interaction --no-progress --no-scripts --no-suggest --prefer-dist
+      - name: Generate application key
+        run: php artisan key:generate
+      - name: Execute tests
+        run: vendor/bin/phpunit
