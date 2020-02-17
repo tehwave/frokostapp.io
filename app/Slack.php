@@ -98,7 +98,7 @@ class Slack extends Model
      *
      * @return \App\Services\Slack\Slack
      */
-    public function getApi()
+    public function api()
     {
         return SlackApi::setAccessToken($this->access_token);
     }
