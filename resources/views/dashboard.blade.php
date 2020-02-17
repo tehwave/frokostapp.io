@@ -134,6 +134,33 @@
                                 </div>
                             </div>
                         </form>
+                        <form method="POST" action="{{ route('slack.message.post', $slack) }}">
+                            @csrf
+                            <div class="row no-gutters">
+                                <div class="col-12 col-lg-6">
+                                    <div class="card shadow border-0 rounded mb-4">
+                                        <div class="card-header bg-transparent">
+                                            <strong>Send a message via FROKOST bot.</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="message">What would you like your message to say?</label>
+                                                <textarea name="message" class="form-control" id="message" placeholder="Hello World!" required="required">{{ old('message') }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer bg-transparent">
+                                            <div class="row">
+                                                <div class="col text-right">
+                                                    <button type="submit" class="btn btn-primary px-6">
+                                                        Send
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
