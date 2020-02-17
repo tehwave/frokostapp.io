@@ -4,6 +4,7 @@ namespace App;
 
 use Str;
 use Exception;
+use Slack as SlackApi;
 use Illuminate\Database\Eloquent\Model;
 
 class Slack extends Model
@@ -89,5 +90,16 @@ class Slack extends Model
         ]);
 
         return $this->settings;
+    }
+
+    /**
+     * Retrieve an instance of Slack API wrapper,
+     * and set up the access token for it.
+     *
+     * @return \App\Services\Slack\Slack
+     */
+    public function getApi()
+    {
+        return SlackApi::setAccessToken($this->access_token);
     }
 }

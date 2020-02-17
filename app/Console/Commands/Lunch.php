@@ -72,7 +72,7 @@ class Lunch extends Command
                 return $query->where('settings->timeslot', Carbon::now()->format('H:i'));
             })
             ->each(function ($slack) use (&$teamsCount) {
-                $api = (new SlackApi($slack->access_token));
+                $api = $slack->getApi();
 
                 if ($slack->setting('presence') === 'active') {
                     $users = $api->activeUsers();
