@@ -10,14 +10,11 @@ https://frokostapp.io
 
 ## Requirements
 
-- PHP >= 7.2
-- MySQL >= 5.7
-- Laravel >= 6.*
+The application has been developed and tested to work with the following minimum requirements:
 
-### PHP Extensions
-
-- ext-curl: *
-- ext-json: *
+- PHP 7.4
+- MySQL 5.7
+- Laravel 6
 
 ## Installation
 
