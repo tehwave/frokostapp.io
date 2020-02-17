@@ -158,14 +158,12 @@ class SlackController extends Controller
 
         $response = $this->getAccessTokenResponse($this->getCode($request));
 
-        dd($response);
-
         $slack = Slack::updateOrCreate([
-            'team_id'       => $result['team_id'],
+            'team_id'       => $response['team']['id'],
         ], [
-            'access_token'  => $result['access_token'],
-            'team_name'     => $result['team']['name'],
-            'data'          => $result,
+            'access_token'  => $response['access_token'],
+            'team_name'     => $response['team']['name'],
+            'data'          => $response,
         ]);
 
         return redirect()->route('slack.dashboard', [
