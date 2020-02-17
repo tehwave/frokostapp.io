@@ -78,7 +78,7 @@
                                             <label for="channel">What channel to tag them in?</label>
                                             <input name="channel" type="text" class="form-control" id="channel" placeholder="#general" value="{{ old('channel', $slack->setting('channel')) }}">
                                             <div class="form-text text-muted">
-                                                Default channel is <code>#general</code>.
+                                                Default channel is <code>#general</code>. For any other channel, you must specify the channel ID.
                                             </div>
                                         </div>
                                         <div class="form-group">
