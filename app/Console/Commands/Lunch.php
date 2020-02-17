@@ -72,7 +72,7 @@ class Lunch extends Command
                 return $query->where('settings->timeslot', Carbon::now()->format('H:i'));
             })
             ->each(function ($slack) use (&$teamsCount) {
-                $api = (new SlackApi($slack->access_token));
+                $api = $slack->api();
 
                 if ($slack->setting('presence') === 'active') {
                     $users = $api->activeUsers();
@@ -103,10 +103,17 @@ class Lunch extends Command
                     })
                     ->join(', ', ' '.__('lunch.conjunction').' ');
 
+
+                $channel = $slack->setting('channel', '#general');
+
+                $api->post('conversations.join', [
+                    'channel' => $channel,
+                ]);
+
                 $message = __('lunch.message.generic', ['user' => $losers]);
 
                 $api->post('chat.postMessage', [
-                    'channel' => $slack->setting('channel', '#general'),
+                    'channel' => $channel,
                     'text' => $message,
                     'link_names' => true,
                 ]);
