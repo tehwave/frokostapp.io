@@ -19,7 +19,7 @@ class MessageController extends Controller
     {
         $api = $slack->api();
 
-        $channel = $slack->setting('channel', '#general');
+        $channel = $request->channel ?? $slack->setting('channel', '#general');
 
         $api->post('conversations.join', [
             'channel' => $channel,

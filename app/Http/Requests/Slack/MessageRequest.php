@@ -25,6 +25,7 @@ class MessageRequest extends FormRequest
     {
         return [
             'message' => ['required', 'string'],
+            'channel' => ['nullable', 'string'],
         ];
     }
 }

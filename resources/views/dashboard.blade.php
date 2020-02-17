@@ -150,6 +150,9 @@
                                         </div>
                                         <div class="card-footer bg-transparent">
                                             <div class="row">
+                                                <div class="col-auto my-auto">
+                                                    <input name="channel" type="text" class="form-control" placeholder="{{ $slack->setting('channel', '#general') }}">
+                                                </div>
                                                 <div class="col text-right">
                                                     <button type="submit" class="btn btn-primary px-6">
                                                         Send
