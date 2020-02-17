@@ -103,10 +103,17 @@ class Lunch extends Command
                     })
                     ->join(', ', ' '.__('lunch.conjunction').' ');
 
+
+                $channel = $slack->setting('channel', '#general');
+
+                $api->post('conversations.join', [
+                    'channel' => $channel,
+                ]);
+
                 $message = __('lunch.message.generic', ['user' => $losers]);
 
                 $api->post('chat.postMessage', [
-                    'channel' => $slack->setting('channel', '#general'),
+                    'channel' => $channel,
                     'text' => $message,
                     'link_names' => true,
                 ]);

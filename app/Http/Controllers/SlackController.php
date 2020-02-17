@@ -35,6 +35,8 @@ class SlackController extends Controller
     protected $scopes = [
         'chat:write',
         'users:read',
+        'channels:read',
+        'channels:join',
     ];
 
     /**
