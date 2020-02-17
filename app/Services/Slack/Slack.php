@@ -136,7 +136,7 @@ class Slack
      */
     public function post($uri, $data = [], $options = [])
     {
-        return $this->request('POST', $uri, $data, array_merge([
+        return $this->request('POST', $uri, array_merge([
             'form_params' => $data,
         ], $options));
     }
