@@ -148,7 +148,9 @@ class Slack
      */
     public function users()
     {
-        $members = $this->get('users.list')['members'];
+        $members = $this->get('users.list', [
+            'limit' => 9999,
+        ])['members'] ?? [];
 
         return collect($members)
             ->filter(function ($user) {
