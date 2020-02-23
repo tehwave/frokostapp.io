@@ -47,7 +47,7 @@ class Slack extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->uuid = Str::orderedUuid();
+            $model->uuid = $model->uuid ?: Str::orderedUuid();
         });
     }
 
