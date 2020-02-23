@@ -155,6 +155,11 @@ class Slack
         return collect($members)
             ->filter(function ($user) {
 
+                // Sanity check.
+                if (! is_array($user)) {
+                    return false;
+                }
+
                 // Deleted?
                 if ($user['deleted']) {
                     return false;
