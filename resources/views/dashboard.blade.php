@@ -53,7 +53,7 @@
                                             <label for="dayslot">Which days should they be picked?</label>
                                             <select name="dayslot[]" class="custom-select" id="dayslot" multiple="multiple">
                                                 @foreach (Carbon\Carbon::getDays() as $day)
-                                                    <option value="{{ $day }}" @if (in_array($day, $slack->setting('dayslot'))) selected="selected" @endif>{{ $day }}</option>
+                                                    <option value="{{ $day }}" @if (in_array($day, (array) $slack->setting('dayslot'))) selected="selected" @endif>{{ $day }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
