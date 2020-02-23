@@ -69,7 +69,13 @@ class Lunch extends Command
             ->when($this->option('now'), function ($query) {
                 return $query;
             }, function ($query) {
-                return $query->where('settings->timeslot', Carbon::now()->format('H:i'));
+                $now = Carbon::now();
+
+                return $query->where('settings->timeslot', $now->format('H:i'))
+                    ->where(function ($query) use ($now) {
+                        $query->whereJsonContains('settings->dayslot', $now->englishDayOfWeek)
+                            ->orWhereJsonLength('settings->dayslot', 0);
+                    });
             })
             ->each(function ($slack) use (&$teamsCount) {
                 $api = $slack->api();
