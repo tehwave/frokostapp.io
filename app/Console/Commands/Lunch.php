@@ -52,7 +52,8 @@ class Lunch extends Command
         // Pick lunch!
         $teamsCount = 0;
 
-        Slack::where('settings->active', true)
+        Slack::query()
+            ->where('settings->active', true)
             ->when($this->argument('slack'), function ($query, $input) {
                 [$id, $limit] = array_pad(explode('-', $input), 2, null);
 
