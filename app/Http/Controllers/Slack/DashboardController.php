@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Slack;
 
 use App\Slack;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
