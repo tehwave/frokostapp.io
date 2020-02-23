@@ -5,6 +5,7 @@ namespace App;
 use Str;
 use Exception;
 use Slack as SlackApi;
+use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
 
 class Slack extends Model
@@ -46,7 +47,7 @@ class Slack extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->uuid = Str::orderedUuid();
+            $model->uuid = $model->uuid ?: Str::orderedUuid();
         });
     }
 
@@ -80,8 +81,8 @@ class Slack extends Model
         }
 
         if (! is_array($arguments[0])) {
-            throw new Exception(
-                'When setting a value in the setttngs, you must pass an array of key / value pairs.'
+            throw new InvalidArgumentException(
+                'When setting a value in the setttings, you must pass an array of key / value pairs.'
             );
         }
 
