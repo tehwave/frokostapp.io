@@ -50,6 +50,14 @@
                                             <input name="count" type="number" class="form-control" id="count" placeholder="1" value="{{ old('count', $slack->setting('count')) }}">
                                         </div>
                                         <div class="form-group mb-4">
+                                            <label for="dayslot">Which days should they be picked?</label>
+                                            <select name="dayslot[]" class="custom-select" id="dayslot" multiple="multiple">
+                                                @foreach (Carbon\Carbon::getDays() as $day)
+                                                    <option value="{{ $day }}" @if (in_array($day, $slack->setting('dayslot'))) selected="selected" @endif>{{ $day }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-4">
                                             <label for="timeslot">When should they be picked?</label>
                                             <div class="input-group">
                                                 <select name="timeslot" class="custom-select" id="timeslot">
