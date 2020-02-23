@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Slack;
 
 use App\Slack;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,6 +25,7 @@ class SettingController extends Controller
                 'channel'   => $request->channel,
                 'count'     => $request->count,
                 'timeslot'  => $request->timeslot,
+                'dayslot'   => $request->dayslot ?? Carbon::getDays(),
                 'language'  => $request->language,
             ],
         ]);
