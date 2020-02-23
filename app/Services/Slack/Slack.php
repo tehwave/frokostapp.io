@@ -142,7 +142,7 @@ class Slack
     }
 
     /**
-     * Retrieve list of users, excluding any deleted users or bots.
+     * Retrieve list of users, excluding any deleted users and bots.
      *
      * @return \Illuminate\Support\Collection
      */
