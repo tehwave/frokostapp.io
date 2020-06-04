@@ -61,6 +61,16 @@
                                             <label for="timeslot">When should they be picked?</label>
                                             <div class="input-group">
                                                 <select name="timeslot" class="custom-select" id="timeslot">
+                                                    {{-- 8 --}}
+                                                    <option value="8:00" {{ old('timeslot', $slack->setting('timeslot')) === '8:00' ? 'selected' : '' }}>8:00</option>
+                                                    <option value="8:15" {{ old('timeslot', $slack->setting('timeslot')) === '8:15' ? 'selected' : '' }}>8:15</option>
+                                                    <option value="8:30" {{ old('timeslot', $slack->setting('timeslot')) === '8:30' ? 'selected' : '' }}>8:30</option>
+                                                    <option value="8:45" {{ old('timeslot', $slack->setting('timeslot')) === '8:45' ? 'selected' : '' }}>8:45</option>
+                                                    {{-- 9 --}}
+                                                    <option value="9:00" {{ old('timeslot', $slack->setting('timeslot')) === '9:00' ? 'selected' : '' }}>9:00</option>
+                                                    <option value="9:15" {{ old('timeslot', $slack->setting('timeslot')) === '9:15' ? 'selected' : '' }}>9:15</option>
+                                                    <option value="9:30" {{ old('timeslot', $slack->setting('timeslot')) === '9:30' ? 'selected' : '' }}>9:30</option>
+                                                    <option value="9:45" {{ old('timeslot', $slack->setting('timeslot')) === '9:45' ? 'selected' : '' }}>9:45</option>
                                                     {{-- 10 --}}
                                                     <option value="10:00" {{ old('timeslot', $slack->setting('timeslot')) === '10:00' ? 'selected' : '' }}>10:00</option>
                                                     <option value="10:15" {{ old('timeslot', $slack->setting('timeslot')) === '10:15' ? 'selected' : '' }}>10:15</option>
@@ -76,6 +86,16 @@
                                                     <option value="12:15" {{ old('timeslot', $slack->setting('timeslot')) === '12:15' ? 'selected' : '' }}>12:15</option>
                                                     <option value="12:30" {{ old('timeslot', $slack->setting('timeslot')) === '12:30' ? 'selected' : '' }}>12:30</option>
                                                     <option value="12:45" {{ old('timeslot', $slack->setting('timeslot')) === '12:45' ? 'selected' : '' }}>12:45</option>
+                                                    {{-- 13 --}}
+                                                    <option value="13:00" {{ old('timeslot', $slack->setting('timeslot')) === '13:00' ? 'selected' : '' }}>13:00</option>
+                                                    <option value="13:15" {{ old('timeslot', $slack->setting('timeslot')) === '13:15' ? 'selected' : '' }}>13:15</option>
+                                                    <option value="13:30" {{ old('timeslot', $slack->setting('timeslot')) === '13:30' ? 'selected' : '' }}>13:30</option>
+                                                    <option value="13:45" {{ old('timeslot', $slack->setting('timeslot')) === '13:45' ? 'selected' : '' }}>13:45</option>
+                                                    {{-- 14 --}}
+                                                    <option value="14:00" {{ old('timeslot', $slack->setting('timeslot')) === '14:00' ? 'selected' : '' }}>14:00</option>
+                                                    <option value="14:15" {{ old('timeslot', $slack->setting('timeslot')) === '14:15' ? 'selected' : '' }}>14:15</option>
+                                                    <option value="14:30" {{ old('timeslot', $slack->setting('timeslot')) === '14:30' ? 'selected' : '' }}>14:30</option>
+                                                    <option value="14:45" {{ old('timeslot', $slack->setting('timeslot')) === '14:45' ? 'selected' : '' }}>14:45</option>
                                                 </select>
                                                 <div class="input-group-append">
                                                     <label class="input-group-text bg-primary border-primary text-white">UTC</label>
